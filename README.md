@@ -1,4 +1,3 @@
-
 # ANSYS validation of the pressure vessel case (Lamé check)
 
 I replicated the cylindrical pressure vessel case in ANSYS and checked the
@@ -12,10 +11,10 @@ The ANSYS stresses match Lamé to about 0.05% mean error across the field.
 
 - Inner radius 0.9 m, outer radius 1.0 m, length 3.0 m
 - Internal pressure 3e5 Pa (3 bar)
-- E = 3 GPa, nu = 0.3 (same placeholder values as the demo)
+- E = 3 GPa, nu = 0.3 (placeholder values from the case I replicated)
 - Linear static structural, pressure on the inner wall
 
-Note: E and nu are the demo's values, not a real material. Stress doesn't
+Note: E and nu are placeholder values, not a real material. Stress doesn't
 depend on E anyway (only displacement does), so the check holds.
 
 ## Results vs Lamé
@@ -41,7 +40,6 @@ Mean error over the field: 0.05%.
 Needs Python with numpy and pandas.
 
 ```
-cd ansys_lame_validation
 python merge_and_validate.py
 ```
 
