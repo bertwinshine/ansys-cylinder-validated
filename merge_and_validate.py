@@ -29,7 +29,7 @@ Expected files in the exports directory (ANSYS 'Node Number<TAB>Value'):
     hoop_stress.txt                       Normal stress, cylindrical Y = hoop  (Pa)
     Radial_stress.txt                     Normal stress, cylindrical X = radial (Pa)
     Equivalent_stress.txt                 von Mises (Pa)
-    Total_defomation.txt                  total deformation (m)
+    Total_deformation.txt                  total deformation (m)
 
 Author: Bertwin Kurisinkal Shine
 """
@@ -90,7 +90,7 @@ def main():
     hp = load(ex, "hoop_stress.txt", "hoop")
     rd = load(ex, "Radial_stress.txt", "radial")
     vm = load(ex, "Equivalent_stress.txt", "von_mises")
-    df_def = load(ex, "Total_defomation.txt", "deformation")
+    df_def = load(ex, "Total_deformation.txt", "deformation")
 
     df = (x.merge(y, on="node").merge(z, on="node")
             .merge(rd, on="node").merge(hp, on="node")
