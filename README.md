@@ -31,9 +31,9 @@ Mean error over the field: 0.05%.
 
 ## Files
 
-- `merge_and_validate.py` - merges the ANSYS exports, runs the Lamé check, writes the CSV
-- `pressure_vessel_reference.csv` - the final field (node, x, y, z, radius, radial, hoop, von_mises, deformation)
-- `ansys_exports/` - the raw ANSYS text exports (coordinates + stresses + deformation)
+- `merge_and_validate.py`: merges the ANSYS exports, runs the Lamé check, writes the CSV
+- `pressure_vessel_reference.csv`: the final field (node, x, y, z, radius, radial, hoop, von_mises, deformation)
+- `ansys_exports/`: the raw ANSYS text exports (coordinates + stresses + deformation)
 
 ## How to run
 
@@ -47,7 +47,7 @@ It reads the files in `ansys_exports/`, prints the validation result, and
 writes `pressure_vessel_reference.csv`. Geometry (inner/outer radius) is read
 from the data, so it works if the size changes.
 
-## Notes / limitations
+## Limitations
 
 - Mesh was kept under the ANSYS Student node limit, so it's not super fine, but
   the error is already 0.05%. A finer mesh on a full license would tighten it.
@@ -55,6 +55,9 @@ from the data, so it works if the size changes.
 - It's one operating point (one E, p). For surrogate training you'd want a set
   of these across the parameter range, done the same way.
 
-The ANSYS modelling and validation are mine. The Python script was written with
-AI help since my Python is still basic - I understand what it does and can walk
-through it.
+## Credit
+
+The ANSYS model and validation are my work. I wrote the Python with help from an
+AI assistant and have checked and understand all of it.
+
+Bertwin Kurisinkal Shine, TU Chemnitz

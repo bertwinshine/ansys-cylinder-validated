@@ -1,28 +1,13 @@
 #!/usr/bin/env python3
 """
-merge_and_validate.py
-=====================
+Merge the ANSYS exports of the thick-walled pressure vessel, compare hoop and
+radial stress with the Lame solution, and write pressure_vessel_reference.csv.
 
-Independent validation of an ANSYS Mechanical static-structural result for the
-thick-walled pressure-vessel case against the exact Lame (1833) analytical
-solution, and export of the certified field as a coordinate->value CSV suitable
-for surrogate (POD / PINN) training.
+Inner and outer radius are read from the node coordinates.
 
-What it does
-------------
-1. Loads the seven ANSYS text exports (node-number + value, tab-separated).
-2. Merges them on node number into one table.
-3. Computes each node's radius from x, y.
-4. Auto-detects inner/outer radius from the coordinates (no hard-coded geometry).
-5. Compares exported hoop and radial stress to the exact Lame solution at every
-   node; reports mean/max % error and a PASS/FAIL verdict.
-6. Spot-checks inner/outer wall values against the closed-form numbers.
-7. Writes pressure_vessel_reference.csv.
-
-Usage
------
+Usage:
     python merge_and_validate.py
-    # optional: python merge_and_validate.py --exports ./ansys_exports --pressure 3e5
+    python merge_and_validate.py --exports ./ansys_exports --pressure 3e5
 
 Expected files in the exports directory (ANSYS 'Node Number<TAB>Value'):
     LOCX.txt, LOCY.txt, LOCZ.txt          undeformed coordinates (m)
@@ -31,7 +16,7 @@ Expected files in the exports directory (ANSYS 'Node Number<TAB>Value'):
     Equivalent_stress.txt                 von Mises (Pa)
     Total_deformation.txt                  total deformation (m)
 
-Author: Bertwin Kurisinkal Shine
+Bertwin Kurisinkal Shine, TU Chemnitz. Written with help from an AI assistant.
 """
 
 import argparse
@@ -40,9 +25,7 @@ import numpy as np
 import pandas as pd
 
 
-# --------------------------------------------------------------------------
-# Lame analytical solution (the reference "ruler")
-# --------------------------------------------------------------------------
+# Lame solution for a thick-walled cylinder
 def lame_stresses(r, a, b, p_i, p_o=0.0):
     """Exact radial and hoop stress for a thick-walled cylinder.
 
